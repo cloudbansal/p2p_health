@@ -33,7 +33,6 @@ class client(Thread):
                 except:
                         pass
 
-            print("Client Killed")
         
         def run(self):
                 self.send_stats(self.interval)

@@ -23,7 +23,6 @@ class server(Thread):
  		   		pass
 
  		sock.close()
- 		print("Server Killed")   	
  	
  	def run(self):
  		self.receive_data()
