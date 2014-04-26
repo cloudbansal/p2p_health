@@ -8,9 +8,11 @@ from p2p.super_server import super_server
 from threading import Thread
 import time
 import signal
+import os
 
 client_interval = 10
-super_client_interval = 10
+super_client_interval = 3
+super_file = "conf/.super"
 
 def signal_handler(signal, frame):
 	print(" ")
@@ -24,6 +26,10 @@ if __name__ == "__main__":
     print("Server Health Monitorig System")
     print("02220 - Distributed Systems")
     print("s135552 - Andrew Habib s135551 - Dheeraj Kumar Bansal")
+    if os.path.isfile(super_file):
+        print("This is a super peer")
+    else
+        print("This is a normal peer")
     client_thread = client(client_interval)
     super_client_thread = super_client(super_client_interval)
         

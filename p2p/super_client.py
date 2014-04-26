@@ -4,16 +4,20 @@
 import socket
 import time
 import re
+import os
 #import sys
 from threading import Thread
 
 
 peer_file = "conf/peers.conf"
 super_peer_file = "conf/super_peers.conf"
-super_server_port = 2222
+super_request_port = 2221
+peer_request_port =  2222
+super_server_port = 2223
 peer = "peers"
 super_peer = "super_peers"
-my_ip = "127.0.0.1"
+#super_client_ip = socket.gethostbyname(socket.getfqdn())
+super_client_ip = "127.0.0.1"
 
 class super_client(Thread):
         
@@ -36,7 +40,7 @@ class super_client(Thread):
                     super_client_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
                     #super_client_sock.setblocking(0)
                     super_client_sock.settimeout(2)
-                    super_client_sock.bind((my_ip,2221))
+                    super_client_sock.bind((super_client_ip,super_request_port))
                     super_client_sock.sendto(super_peer.encode(),(UDP_IP, UDP_PORT))
                     #print("Super Client sent super peers")
                     
@@ -88,7 +92,7 @@ class super_client(Thread):
                     super_client_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
                     #super_client_sock.setblocking(0)
                     super_client_sock.settimeout(2)
-                    super_client_sock.bind((my_ip,2223))
+                    super_client_sock.bind((super_client_ip,peer_request_port))
                     #print("Super Client sent peers")
                     super_client_sock.sendto(peer.encode(),(UDP_IP, UDP_PORT))
                     peer_data, addr = super_client_sock.recvfrom(1024)
@@ -126,6 +130,6 @@ class super_client(Thread):
     def run(self):
         while self.keepRunning:
             self.update_super_conf()
-            time.sleep(1)
+            time.sleep(self.interval)
             self.update_peer_conf()
-            time.sleep(1)     
+            time.sleep(self.interval)     

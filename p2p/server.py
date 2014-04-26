@@ -6,7 +6,8 @@ import os
 #import sys
 from datetime import datetime
 from threading import Thread
-
+#peer_server_ip = socket.gethostbyname(socket.getfqdn())
+peer_server_ip = "127.0.0.1"
 peer_server_port = 2220
 log_file = "logs/peers.log"
 max_log_size = 3*1024*1024 #3MB
@@ -20,7 +21,7 @@ class server(Thread):
 	
 	def receive_data(self):
 	
-		UDP_IP = socket.gethostbyname(socket.getfqdn())
+		UDP_IP = peer_server_ip
 		UDP_PORT = peer_server_port
 		#print("Server IP is " + UDP_IP)
 		server_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)

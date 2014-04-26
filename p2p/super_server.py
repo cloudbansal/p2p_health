@@ -7,7 +7,9 @@ from threading import Thread
 
 peer_file = "conf/peers.conf"
 super_peer_file = "conf/super_peers.conf"
-super_server_port = 2222
+#super_server_ip = socket.gethostbyname(socket.getfqdn())
+super_server_ip = "127.0.0.1"
+super_server_port = 2223
 peer = "peers"
 super_peer = "super_peers"
 
@@ -19,7 +21,7 @@ class super_server(Thread):
     
     def receive_data(self):
     
-        UDP_IP = socket.gethostbyname(socket.getfqdn())
+        UDP_IP = super_server_ip
         UDP_PORT = super_server_port
         #print("Super Server IP is " + UDP_IP)
         super_server_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
