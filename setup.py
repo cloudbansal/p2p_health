@@ -13,20 +13,25 @@ import os
 client_interval = 10
 super_client_interval = 30
 super_file = "conf/.super"
+peer_file = "conf/.peer"
 
 def signal_handler(signal, frame):
 	
     print(" ")
     print("Wait for some time as system is shutting down...")
 
-    super_client_thread.keepRunning = False
-    server_thread.keepRunning = False
-    client_thread.keepRunning = False
     
     if os.path.isfile(super_file):
-	   super_server_thread.keepRunning = False
-	
-
+        super_server_thread.keepRunning = False
+        super_client_thread.keepRunning = False
+        if os.path.isfile(peer_file):
+            server_thread.keepRunning = False
+            client_thread.keepRunning = False
+    else:
+        super_client_thread.keepRunning = False
+        server_thread.keepRunning = False
+        client_thread.keepRunning = False
+    
 if __name__ == "__main__":
     
     print("Server Health Monitorig System")
@@ -35,21 +40,32 @@ if __name__ == "__main__":
     
     if os.path.isfile(super_file):
         print("This is a super peer")
+        if os.path.isfile(peer_file):
+            print("This is a also a normal peer")
     else:
         print("This is a normal peer")
     
-    client_thread = client(client_interval)
-    super_client_thread = super_client(super_client_interval)
     
-    server_thread = server()
-    
+
     if os.path.isfile(super_file):
         super_server_thread = super_server()
         super_server_thread.start()
+        super_client_thread = super_client(super_client_interval)
+        super_client_thread.start()
+        if os.path.isfile(peer_file):
+            client_thread = client(client_interval)
+            server_thread = server()
+            server_thread.start()
+            client_thread.start()
+    else:
+        super_client_thread = super_client(super_client_interval)
+        super_client_thread.start()
+        client_thread = client(client_interval)
+        server_thread = server()
+        server_thread.start()
+        client_thread.start()
         
-    super_client_thread.start()
-    server_thread.start()
-    client_thread.start()
+    
     
     signal.signal(signal.SIGINT, signal_handler)
     signal.pause()
