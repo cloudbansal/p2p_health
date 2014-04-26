@@ -5,6 +5,7 @@ import socket
 import time
 import re
 import os
+super_file = "conf/.super"
 #import sys
 from threading import Thread
 
@@ -125,11 +126,12 @@ class super_client(Thread):
                     pass
                     #e = sys.exc_info()[0]
                     #print(str(e) + "in super_client.py in update_peer_conf")
-            
 
     def run(self):
         while self.keepRunning:
             self.update_super_conf()
             time.sleep(self.interval)
             self.update_peer_conf()
-            time.sleep(self.interval)     
+            time.sleep(self.interval)
+            if not os.path.isfile(super_file):
+                open(peer_file,"w").close()   

@@ -11,36 +11,45 @@ import signal
 import os
 
 client_interval = 10
-super_client_interval = 3
+super_client_interval = 30
 super_file = "conf/.super"
 
 def signal_handler(signal, frame):
-	print(" ")
-	print("wait for some time as system is shutting down...")
-	client_thread.keepRunning = False
-	super_server_thread.keepRunning = False
-	super_client_thread.keepRunning = False
-	server_thread.keepRunning = False
+	
+    print(" ")
+    print("Wait for some time as system is shutting down...")
+
+    super_client_thread.keepRunning = False
+    server_thread.keepRunning = False
+    client_thread.keepRunning = False
+    
+    if os.path.isfile(super_file):
+	   super_server_thread.keepRunning = False
+	
 
 if __name__ == "__main__":
+    
     print("Server Health Monitorig System")
     print("02220 - Distributed Systems")
     print("s135552 - Andrew Habib s135551 - Dheeraj Kumar Bansal")
+    
     if os.path.isfile(super_file):
         print("This is a super peer")
-    else
+    else:
         print("This is a normal peer")
+    
     client_thread = client(client_interval)
     super_client_thread = super_client(super_client_interval)
-        
+    
     server_thread = server()
-    super_server_thread = super_server()
+    
+    if os.path.isfile(super_file):
+        super_server_thread = super_server()
+        super_server_thread.start()
         
     super_client_thread.start()
-    client_thread.start()
-    
-    super_server_thread.start()
     server_thread.start()
+    client_thread.start()
     
     signal.signal(signal.SIGINT, signal_handler)
     signal.pause()
