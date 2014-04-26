@@ -38,12 +38,12 @@ class super_client(Thread):
                     super_client_sock.settimeout(2)
                     super_client_sock.bind((my_ip,2221))
                     super_client_sock.sendto(super_peer.encode(),(UDP_IP, UDP_PORT))
-                    print("Super Client sent super peers")
+                    #print("Super Client sent super peers")
                     
                     super_peer_data, addr = super_client_sock.recvfrom(1024)
                     recv_super_peer_data = super_peer_data.decode().split(';')
 
-                    print("Super Client got super peers as " + str(recv_super_peer_data) )
+                    #print("Super Client got super peers as " + str(recv_super_peer_data) )
                     with open(super_peer_file,"r") as f:
                         super_peers = list(line for line in (l.strip() for l in f) if line)
                     f.close()
@@ -89,7 +89,7 @@ class super_client(Thread):
                     #super_client_sock.setblocking(0)
                     super_client_sock.settimeout(2)
                     super_client_sock.bind((my_ip,2223))
-                    print("Super Client sent peers")
+                    #print("Super Client sent peers")
                     super_client_sock.sendto(peer.encode(),(UDP_IP, UDP_PORT))
                     peer_data, addr = super_client_sock.recvfrom(1024)
                     recv_peer_data = peer_data.decode().split(';')
@@ -98,7 +98,7 @@ class super_client(Thread):
                         peers = list(line for line in (l.strip() for l in f) if line)
                     f.close()
 
-                    print("Super Client got peers as " + str(recv_peer_data) )
+                    #print("Super Client got peers as " + str(recv_peer_data) )
                     for peer_ip in recv_peer_data:
                         if peer_ip not in peers:
                             peers.append(peer_ip)
