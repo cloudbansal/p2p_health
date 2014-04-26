@@ -34,6 +34,9 @@ class server(Thread):
 				local_time = str(datetime.utcnow().strftime('%a %Y-%m-%d %H:%M:%S'))
 				
 				#print("\"System time\":\"" + local_time +"\"," + data.decode())
+				if not os.path.exists(os.path.dirname(log_file)):
+    				os.makedirs(os.path.dirname(log_file))
+				
 				if os.path.isfile(log_file) and os.stat(log_file).st_size > max_log_size:
 					bak_file = "%s.bak.%s" % (log_file,local_time)
 					os.rename(log_file,bak_file)
