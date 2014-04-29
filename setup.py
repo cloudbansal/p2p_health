@@ -11,7 +11,7 @@ import time
 import signal
 import os
 
-client_interval = 10
+client_interval = 10 
 super_client_interval = 30
 peer_client_interval = 30
 super_file = "conf/.super"
@@ -35,6 +35,8 @@ def signal_handler(signal, frame):
         server_thread.keepRunning = False
         client_thread.keepRunning = False
     
+    keepRunning = False
+
 if __name__ == "__main__":
     
     print("Server Health Monitorig System")
@@ -71,4 +73,12 @@ if __name__ == "__main__":
     
     
     signal.signal(signal.SIGINT, signal_handler)
-    signal.pause()
+    
+    try:
+        while keepRunning:
+            pass
+    except:
+        keepRunning = False
+        time.sleep(10)
+
+    #signal.pause()

@@ -46,8 +46,8 @@ class client(Thread):
                                 client_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
                                 print ("Sending to " + UDP_IP)
                                 client_sock.sendto(STATS, (UDP_IP, UDP_PORT))
-                                time.sleep(0.2)
-                            time.sleep(n)  
+                                time.sleep(0.5)
+                        time.sleep(n)  
                 except:
                     pass
                     #e = sys.exc_info()[0]
