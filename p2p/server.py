@@ -34,7 +34,7 @@ class server(Thread):
 				data, addr = server_sock.recvfrom(1024)
 				local_time = str(datetime.utcnow().strftime('%a %Y-%m-%d %H:%M:%S'))
 				
-				#print("\"System time\":\"" + local_time +"\"," + data.decode())
+				print("\"System time\":\"" + local_time +"\"," + data.decode())
 				if not os.path.exists(os.path.dirname(log_file)):
 					os.makedirs(os.path.dirname(log_file))
 				
