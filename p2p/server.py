@@ -36,8 +36,10 @@ class server(Thread):
 
 				if os.path.isfile(log_file):
 					if os.stat(log_file).st_size > max_log_size:
-						bak_file = "%s.bak.%s" % (log_file,local_time)
+						bak_file = "%s.%s.bak" % (log_file,local_time)
 						os.rename(log_file,bak_file)
+						if debug:
+							print("Log file Backed up as " + bak_file)
 
 				with open(log_file,"a") as f:
 					line = "\"System time\":\"%s\",%s" % (local_time,data.decode())
