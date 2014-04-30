@@ -1,13 +1,11 @@
 import socket
 
-peer_client_ip = socket.gethostbyname(socket.getfqdn())
-#peer_client_ip = "127.0.0.1"
-super_server_ip = socket.gethostbyname(socket.getfqdn())
-#super_server_ip = "127.0.0.1"
-peer_server_ip = socket.gethostbyname(socket.getfqdn())
-#peer_server_ip = "127.0.0.1"
-super_client_ip = socket.gethostbyname(socket.getfqdn())
-#super_client_ip = "127.0.0.1"
+system_ip = socket.gethostbyname(socket.getfqdn())
+#system_ip = "127.0.0.1"
+peer_client_ip = system_ip
+super_server_ip = system_ip
+peer_server_ip = system_ip
+super_client_ip = system_ip
 
 debug = True  #Print all activity on screen
 peer_server_port = 2220  #Receiveing port for statistics data
