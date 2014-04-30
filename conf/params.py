@@ -24,9 +24,9 @@ super_peer_file = "conf/super_peers.conf" #List of Super peers
 log_file = "logs/peers.log"  #Log file for system statistics
 max_log_size = 3*1024*1024 #3MB #Maximum log file size
 
-client_interval = 5 #Time interval for the client to send stats to other peers 
-super_client_interval = 20 #Time interval for Super Peer to update peers and super peer lists
-peer_client_interval = 10 #Time interval for client to update  peers and super peer lists
+client_interval = 1 #Time interval for the client to send stats to other peers 
+super_client_interval = 2000 #Time interval for Super Peer to update peers and super peer lists
+peer_client_interval = 1000 #Time interval for client to update  peers and super peer lists
 
 get_peer = "get_peer" #Get list of peers
 get_super_peer = "get_super_peer" #Get list of Super peers

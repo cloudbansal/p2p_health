@@ -34,14 +34,15 @@ class server(Thread):
 				if not os.path.exists(os.path.dirname(log_file)):
 					os.makedirs(os.path.dirname(log_file))
 
-				if os.path.isfile(log_file) and os.stat(log_file).st_size > max_log_size:
-					bak_file = "%s.bak.%s" % (log_file,local_time)
-					os.rename(log_file,bak_file)
+				if os.path.isfile(log_file):
+					if os.stat(log_file).st_size > max_log_size:
+						bak_file = "%s.bak.%s" % (log_file,local_time)
+						os.rename(log_file,bak_file)
 
-					with open(log_file,"a") as f:
-						line = "\"System time\":\"%s\",%s" % (local_time,data.decode())
-						print(line,file=f)
-					f.close()
+				with open(log_file,"a") as f:
+					line = "\"System time\":\"%s\",%s" % (local_time,data.decode())
+					print(line,file=f)
+				f.close()
 
 			except:
 				pass
