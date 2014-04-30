@@ -13,8 +13,8 @@ super_request_port = 2221 #Receiving port for Super peer list
 peer_request_port =  2222 #Receiving port for peer list
 super_server_port = 2223  #Super peer Server port
 
-super_peer_enable = "conf/.super" #Enable Super peer function
-peer_enable = "conf/.peer" #Enable peer function for Super peer
+super_peer_enable = True #Enable Super peer function
+peer_enable = True #Enable peer function for Super peer
 
 peer_file = "conf/peers.conf" #List of peers
 super_peer_file = "conf/super_peers.conf" #List of Super peers

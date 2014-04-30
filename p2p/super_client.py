@@ -4,7 +4,6 @@ from __future__ import print_function
 import socket
 import time
 import re
-import os
 #import sys
 from threading import Thread
 from p2p.validate import is_valid_IP
@@ -135,7 +134,7 @@ class super_client(Thread):
                     super_client_sock.sendto(add_super_peer.encode(),(UDP_IP, UDP_PORT))
                     if debug:
                         print("Super Peer Added itself to Super Peer " + str(IP).strip() + " as Super Peer")
-                    if os.path.isfile(peer_enable):
+                    if peer_enable:
                         super_client_sock.sendto(add_peer.encode(),(UDP_IP, UDP_PORT))
                         if debug:
                             print("Super Peer Added itself to Super Peer " + str(IP).strip() + " as peer")
@@ -158,7 +157,7 @@ class super_client(Thread):
                     super_client_sock.sendto(remove_super_peer.encode(),(UDP_IP, UDP_PORT))
                     if debug:
                         print("Super Peer Removed itself from Super Peer " + str(IP).strip() + " as Super Peer")
-                    if os.path.isfile(peer_enable):
+                    if peer_enable:
                         super_client_sock.sendto(remove_peer.encode(),(UDP_IP, UDP_PORT))
                         if debug:
                             print("Super Peer Removed itself from Super Peer " + str(IP).strip() + " as peer")

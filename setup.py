@@ -19,11 +19,11 @@ def signal_handler(signal, frame):
     print("Wait for some time as system is shutting down...")
 
     
-    if os.path.isfile(super_peer_enable):
+    if super_peer_enable:
         super_client_thread.keepRunning = False
         super_server_thread.keepRunning = False
         
-        if os.path.isfile(peer_enable):
+        if peer_enable:
             server_thread.keepRunning = False
             client_thread.keepRunning = False
     else:
@@ -43,21 +43,21 @@ if __name__ == "__main__":
     print("s135552 - Andrew Habib")
     print("s135551 - Dheeraj Kumar Bansal")
     print("------------------------------")
-    if os.path.isfile(super_peer_enable):
+    if super_peer_enable:
         print("Running as a Super Peer")
-        if os.path.isfile(peer_enable):
+        if peer_enable:
             print("Also Running as a Normal Peer")
     else:
         print("Running as a Normal Peer")
     
     
 
-    if os.path.isfile(super_peer_enable):
+    if super_peer_enable:
         super_server_thread = super_server()
         super_server_thread.start()
         super_client_thread = super_client(super_client_interval)
         super_client_thread.start()
-        if os.path.isfile(peer_enable):
+        if peer_enable:
             client_thread = client(client_interval)
             server_thread = server()
             server_thread.start()

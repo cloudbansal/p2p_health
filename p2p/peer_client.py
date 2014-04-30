@@ -4,7 +4,6 @@ from __future__ import print_function
 import socket
 import time
 import re
-import os
 #import sys
 from threading import Thread
 from p2p.validate import is_valid_IP
