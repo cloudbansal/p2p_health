@@ -8,9 +8,7 @@ import socket
 from datetime import datetime
 from threading import Thread
 from p2p.validate import is_valid_IP
-
-peer_file = "conf/peers.conf"
-peer_server_port = 2220
+from conf.params import *
 
 class client(Thread):
         
@@ -39,14 +37,15 @@ class client(Thread):
                 
                 try:
                         for IP in content:
-                            if IP.strip() and is_valid_IP(IP):
-                                UDP_IP = IP
-                                UDP_PORT = peer_server_port
-                                STATS = self.get_usage().encode()
-                                client_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-                                print ("Sending to " + UDP_IP)
-                                client_sock.sendto(STATS, (UDP_IP, UDP_PORT))
-                                time.sleep(0.5)
+                                if IP.strip() and is_valid_IP(IP):
+                                        UDP_IP = IP
+                                        UDP_PORT = peer_server_port
+                                        STATS = self.get_usage().encode()
+                                        client_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+                                        if debug:
+                                            print ("Sending system stats to " + UDP_IP.strip() + " ...")
+                                        client_sock.sendto(STATS, (UDP_IP, UDP_PORT))
+                                        time.sleep(0.5)
                         time.sleep(n)  
                 except:
                     pass
