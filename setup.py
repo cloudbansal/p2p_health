@@ -9,7 +9,6 @@ from p2p.peer_client import peer_client
 from threading import Thread
 import time
 import signal
-import os
 import sys
 from conf.params import *
 
