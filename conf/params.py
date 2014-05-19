@@ -1,7 +1,7 @@
 import socket
 
-system_ip = socket.gethostbyname(socket.getfqdn())
-#system_ip = "127.0.0.1"
+#system_ip = socket.gethostbyname(socket.getfqdn())
+system_ip = "127.0.0.1"
 peer_client_ip = system_ip
 super_server_ip = system_ip
 peer_server_ip = system_ip
